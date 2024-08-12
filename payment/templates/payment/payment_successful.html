@@ -1,0 +1,42 @@
+<h1>Payment successful</h1>
+{% if room_number %}
+{% csrf_token %}
+<h2>You will be soon redirected to booking page...</h2>
+{% else %}
+<h2>You will soon be redirected to your dashboard...</h2>
+{% endif %}
+<hr>
+<script>
+  function redirectTo(url) {
+    setTimeout(function () {
+      window.location.href = url
+    }, 3000); // Redirect after 3 seconds (3000 milliseconds)
+  }
+
+  var redirectUrl = "{{redirect_url}}"
+  if (redirectUrl) {
+    redirectTo(redirectUrl)
+
+    var roomNumber = "{{room_number}}"
+    if (roomNumber) {
+      var url = "/core/create-booking/"
+      var csrfToken = document.querySelector('input[name=csrfmiddlewaretoken]').value;
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({"room_number": roomNumber})
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+    }
+  }
+</script>

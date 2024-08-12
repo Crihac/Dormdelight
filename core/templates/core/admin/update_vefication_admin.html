@@ -1,0 +1,10 @@
+{% load core_custom_filters %}
+<h2>Verification : {{object.person}}</h2>
+<a href="{% url 'core:verification-list-admin' %}">Back</a>
+<hr>
+<h2>Id type : {{object.id_type|parse_id_type}}</h2>
+<h2>Id number : {{object.id_number}}</h2>
+<form method="POST"> {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Submit</button>
+</form>

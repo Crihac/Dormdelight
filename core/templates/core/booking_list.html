@@ -1,0 +1,18 @@
+{% load core_custom_filters %}
+<h2>Your previous bookings :</h2>
+<a href="{% url 'user:user-detail' user.resident.resident_id %}">Back</a>
+<hr>
+{% if not booking_list %}
+    Ohh... You have no previous bookings
+{% endif %}
+<ul>
+    {% for booking in booking_list %}
+        <strong>
+            <li>{{booking}}</li>
+        </strong>
+        Room appplied : {{booking.room_applied}}<br>
+        Date appplied : {{booking.date_applied}} <br>
+        Status : {{booking.status|parse_booking_status}}
+        <br><br>
+    {% endfor %}
+</ul>

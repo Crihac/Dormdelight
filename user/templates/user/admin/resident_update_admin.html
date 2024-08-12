@@ -1,0 +1,7 @@
+<h2>Update {{object.user.first_name}}'s profile :-</h2>
+<a href="{% url 'user:user-list-admin' %}">Back</a>
+<hr>
+<form method="POST"> {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Save</button>
+</form>

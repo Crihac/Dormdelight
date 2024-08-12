@@ -1,0 +1,10 @@
+<h2>Residents in DormDelight :-</h2>
+<a href="{% url 'user:admin-dashboard' %}">Dashboard</a>
+<hr>
+<ol>
+  {% for resident in resident_list %}
+  <strong>
+    <li><a href="{% url 'user:user-update-admin' resident.resident_id %}">{{resident.user.first_name}}</a></li>
+  </strong><br>
+  {% endfor %}
+</ol>

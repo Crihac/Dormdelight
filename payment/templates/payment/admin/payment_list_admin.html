@@ -1,0 +1,26 @@
+<h2>All payments :- </h2>
+<a href="{% url 'user:admin-dashboard' %}">Dashboard</a>
+<hr>
+
+<h2>Pending :-</h2>
+<ul>
+    {% for payment in pending_payments %}
+        <li><a href="{% url 'payment:payment-detail-admin' payment.payment_id %}">{{payment}}</a></li>
+    {% endfor %}
+</ul>
+<hr>
+
+<h2>Successful :-</h2>
+<ul>
+    {% for payment in successful_payments %}
+        <li><a href="{% url 'payment:payment-detail-admin' payment.payment_id %}">{{payment}}</a></li>
+    {% endfor %}
+</ul>
+<hr>
+
+<h2>Canceled :-</h2>
+<ul>
+    {% for payment in cancled_payments %}
+        <li><a href="{% url 'payment:payment-detail-admin' payment.payment_id %}">{{payment}}</a></li>
+    {% endfor %}
+</ul>

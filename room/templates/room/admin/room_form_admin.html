@@ -1,0 +1,17 @@
+{% load room_custom_filters %}
+{% if object %}
+    <h2>Modify room {{object.room_number}}</h2>
+    <a href="{% url 'room:room-detail' object.floor object.room_number %}">Back</a>
+{% else %}
+    <h2>Add a room on {{floor|parse_floor}} floor:-</h2>
+    <a href="{% url 'room:room-list' floor %}">Back</a>
+{% endif %}
+<hr>
+<form method="POST"> {% csrf_token %}
+    {{form.as_p}}
+    {% if object %}
+        <button type="submit">Update</button>
+    {% else %}
+        <button type="submit">Update</button>
+    {% endif %}
+</form>

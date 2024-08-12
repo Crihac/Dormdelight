@@ -1,0 +1,8 @@
+<h2>Enter your details to join the Dorm :-</h2>
+<hr>
+<form method="POST"> {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit">Register</button>
+</form>
+<h2>Already a Dormmy ?</h2>
+<a href="{% url 'user:user-login' %}">Enter Dorm</a>

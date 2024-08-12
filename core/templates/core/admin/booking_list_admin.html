@@ -1,0 +1,26 @@
+<h2>All bookings</h2>
+<a href="{% url 'user:admin-dashboard' %}">Dashboard</a>
+<hr>
+
+<h2>Pending :-</h2>
+<ul>
+    {% for booking in pending_bookings %}
+        <li><a href="{% url 'core:update-booking-admin' booking.id %}">{{booking}}</a></li>
+    {% endfor %}
+</ul>
+<hr>
+
+<h2>Verified :-</h2>
+<ul>
+    {% for booking in successful_bookings %}
+        <li><a href="{% url 'core:update-booking-admin' booking.id %}">{{booking}}</a></li>
+    {% endfor %}
+</ul>
+<hr>
+
+<h2>Canceled :-</h2>
+<ul>
+    {% for booking in cancled_bookings %}
+        <li><a href="{% url 'core:update-booking-admin' booking.id %}">{{booking}}</a></li>
+    {% endfor %}
+</ul>

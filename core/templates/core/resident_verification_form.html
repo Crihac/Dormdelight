@@ -1,0 +1,7 @@
+<h2>Resident Verification form :</h2>
+<a href="{% url 'user:user-detail' user.resident.resident_id %}">Back</a>
+<hr>
+<form method="POST"> {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit">Submit</button>
+</form>

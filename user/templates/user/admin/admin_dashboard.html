@@ -1,0 +1,7 @@
+<h2>Hi {{user.first_name}}, manage you Dorm here :-</h2>
+<a href="{% url 'home:home' %}">Home</a>
+<hr>
+<h2><a href="{% url 'user:user-list-admin' %}">Residents</a></h2>
+<h2><a href="{% url 'core:verification-list-admin' %}">Verifications</a></h2>
+<h2><a href="{% url 'core:booking-list-admin' %}">Bookings</a></h2>
+<h2><a href="{% url 'payment:payment-list-admin' %}">Payments</a></h2>

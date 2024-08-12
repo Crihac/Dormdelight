@@ -1,0 +1,26 @@
+<h2>All verifications</h2>
+<a href="{% url 'user:admin-dashboard' %}">Dashboard</a>
+<hr>
+
+<h2>Pending :-</h2>
+<ul>
+  {% for verification in pending_verifications %}
+  <li><a href="{% url 'core:update-verification-admin' verification.person.resident_id %}">{{verification}}</a></li>
+  {% endfor %}
+</ul>
+<hr>
+
+<h2>Verified :-</h2>
+<ul>
+  {% for verification in successful_verifications %}
+  <li><a href="{% url 'core:update-verification-admin' verification.person.resident_id %}">{{verification}}</a></li>
+  {% endfor %}
+</ul>
+<hr>
+
+<h2>Canceled :-</h2>
+<ul>
+  {% for verification in cancled_verifications %}
+  <li><a href="{% url 'core:update-verification-admin' verification.person.resident_id %}">{{verification}}</a></li>
+  {% endfor %}
+</ul>

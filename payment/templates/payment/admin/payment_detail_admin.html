@@ -1,0 +1,11 @@
+<h2>Payment details :-</h2>
+<a href="{% url 'payment:payment-list-admin' %}">Back</a>
+<hr>
+<h2>Payer : {{object.payer}}</h2>
+<h2>Paid for room : {{object.room.room_number}}</h2>
+<h2>Date of payment : {{object.date_of_payment}}</h2>
+<h2>Payment ID : {{object.razorpay_payment_id}}</h2>
+<form method="POST"> {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit">Save</button>
+</form>

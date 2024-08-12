@@ -1,0 +1,48 @@
+{% load room_custom_filters %}
+<h2 data-room-id="{{room.room_number}}" id="room-number">Room : {{room.room_number}}</h2>
+<a href="{% url 'room:room-list' room.floor %}">Back</a>
+<hr>
+<h2>Floor : {{room.floor|parse_floor}}</h2>
+<h2>Type : {{room.type|parse_type}}</h2>
+<h2>AC : {{room.ac|yesno:"Yes,No"}}</h2>
+<h2>Status : {{room.occupied|yesno:"Occupied,Vaccant"}}</h2>
+<h2>Rent : {{room.rent}}</h2>
+{% if not user.is_admin %}
+    <br>
+    <button type="submit" id="booking-button" {% if room.occupied %} disabled {% endif %}>Book</button>
+{% endif %}
+<hr>
+{% if user.is_admin %}
+    <a href="{% url 'room:room-update-admin' room.floor room.room_number %}">Update this room</a>
+{% else %}
+    {% csrf_token %}
+    <script>
+        const bookingButton = document.getElementById("booking-button")
+        bookingButton.addEventListener("click",function(){
+            createBooking()
+        })
+        function createBooking() {
+            var url = "/core/create-booking/"
+            var csrfToken = document.querySelector('input[name=csrfmiddlewaretoken]').value
+            var roomNumber =  document.getElementById("room-number").getAttribute("data-room-id")
+            fetch(url,{
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({"room_number":roomNumber})
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                console.log(data)
+                if(data.redirect) {
+                    window.location.href = data.redirect_url
+                }
+            })
+                .catch((error) => {
+                console.log(error)
+            })
+        }
+    </script>
+{% endif %}

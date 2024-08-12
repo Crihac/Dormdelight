@@ -1,0 +1,11 @@
+{% load room_custom_filters %}
+<h2>Rooms on {{floor|parse_floor}} floor :-</h2>
+<a href="{% url 'home:home' %}">Back</a>
+<hr>
+{% for room in room_list %}
+    <h1><a href="{% url 'room:room-detail' room.floor room.room_number %}">{{room.room_number}}</a></h2>
+{% endfor %}
+<hr>
+{% if user.is_admin %}
+    <a href="{% url 'room:room-add-admin' floor %}">Add a room</a>
+{% endif %}
